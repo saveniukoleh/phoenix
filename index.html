@@ -160,7 +160,7 @@
                 // Масив типів контенту кожного маркера, заповнюється значеннями: зображення, модель, відео
                 const modes = ["model"];
                 // Масив файлів моделей, якщо немає моделі буде додано порожній рядок
-                const modelFiles = ["phoenix.gltf"];
+                const modelFiles = ["phoenix.glb"];
                 // Масив файлів зображень, якщо немає зображення буде додано також порожній рядок
                 const imageFiles = [""];
                 // Масив файлів відео, якщо немає відео буде ще один порожній рядок
@@ -203,11 +203,21 @@
 
                             contentPromises.push(new Promise((resolve) => {
                                 const test = new THREE.GLTF2Loader().load(`${modelFiles[i]}`, (response) => {
+
+                                    mesh11 = new THREE.Mesh(new THREE.PlaneBufferGeometry(0.5, 0.5),
+                                        new THREE.MeshBasicMaterial({ color: '#00f' }));
+                                    // Повертаємо площину
+                                    mesh11.rotation.x = -Math.PI / 2;
+                                    // Додаємо площину у контейнер
+                                    markerRoots[i].add(mesh11);
+
                                     const scene = response.scene;
                                     const object = scene.children[0];
                                     // Іноді модель не можна побачити з кількох причин, найчастіше варто збільшити чи зменшити у 100 разів.
                                     // Читайте: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
-                                    // object.scale.set(0.01, 0.01, 0.01)
+                                    object.scale.set(0.1, 0.1, 0.1)
+                                    object.rotation.set(0, 0, 0)
+                                    object.position.set(30, -200, -100)
                                     console.log(object)
                                     markerRoots[i].add(object);
                                     resolve(modelFiles[i])
