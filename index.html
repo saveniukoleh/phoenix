@@ -160,7 +160,7 @@
                 // Масив типів контенту кожного маркера, заповнюється значеннями: зображення, модель, відео
                 const modes = ["model"];
                 // Масив файлів моделей, якщо немає моделі буде додано порожній рядок
-                const modelFiles = ["untitled.glb"];
+                const modelFiles = ["phoenix.gltf"];
                 // Масив файлів зображень, якщо немає зображення буде додано також порожній рядок
                 const imageFiles = [""];
                 // Масив файлів відео, якщо немає відео буде ще один порожній рядок
@@ -208,6 +208,7 @@
                                     // Іноді модель не можна побачити з кількох причин, найчастіше варто збільшити чи зменшити у 100 разів.
                                     // Читайте: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
                                     // object.scale.set(0.01, 0.01, 0.01)
+                                    console.log(object)
                                     markerRoots[i].add(object);
                                     resolve(modelFiles[i])
                                 }, onProgress, onError)
