@@ -65,6 +65,8 @@
 
             var contentPromises = [];
 
+            var mixer = undefined;
+
             let contentInitialized = false;
             let barcodesSound = new Map();
             let patternsSound = new Map();
@@ -203,22 +205,18 @@
 
                             contentPromises.push(new Promise((resolve) => {
                                 const test = new THREE.GLTF2Loader().load(`${modelFiles[i]}`, (response) => {
-
-                                    mesh11 = new THREE.Mesh(new THREE.PlaneBufferGeometry(0.5, 0.5),
-                                        new THREE.MeshBasicMaterial({ color: '#00f' }));
-                                    // Повертаємо площину
-                                    mesh11.rotation.x = -Math.PI / 2;
-                                    // Додаємо площину у контейнер
-                                    markerRoots[i].add(mesh11);
+                                    const animations = response.animations;
+                                    mixer = new THREE.AnimationMixer(response.scene);
+                                    const animation = mixer.clipAction( animations[ 0 ] );
+                                    animation.play()
 
                                     const scene = response.scene;
                                     const object = scene.children[0];
                                     // Іноді модель не можна побачити з кількох причин, найчастіше варто збільшити чи зменшити у 100 разів.
                                     // Читайте: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
-                                    object.scale.set(0.1, 0.1, 0.1)
-                                    object.rotation.set(0, 0, 0)
-                                    object.position.set(30, -200, -100)
-                                    console.log(object)
+                                    object.scale.set(0.005, 0.005, 0.005)
+                                    object.rotation.set(0, 0, Math.PI / 2)
+                                    object.position.set(0, 1.5, -0.5)
                                     markerRoots[i].add(object);
                                     resolve(modelFiles[i])
                                 }, onProgress, onError)
@@ -426,6 +424,7 @@
                 requestAnimationFrame(animate);
                 deltaTime = clock.getDelta();
                 totalTime += deltaTime;
+                mixer?.update( deltaTime );
                 update();
                 checkController();
                 render();
