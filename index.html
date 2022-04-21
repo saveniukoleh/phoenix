@@ -207,7 +207,7 @@
                                     const object = scene.children[0];
                                     // Іноді модель не можна побачити з кількох причин, найчастіше варто збільшити чи зменшити у 100 разів.
                                     // Читайте: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
-                                    object.scale.set(0.01, 0.01, 0.01)
+                                    // object.scale.set(0.01, 0.01, 0.01)
                                     markerRoots[i].add(object);
                                     resolve(modelFiles[i])
                                 }, onProgress, onError)
