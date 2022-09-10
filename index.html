@@ -427,7 +427,7 @@
                 requestAnimationFrame(animate);
                 deltaTime = clock.getDelta();
                 totalTime += deltaTime;
-                // mixer?.update(deltaTime);
+                mixer?.update(deltaTime);
                 update();
                 checkController();
                 render();
