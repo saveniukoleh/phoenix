@@ -22,7 +22,8 @@
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace; user-select: none; pointer-events: none;'>
 
-    <div id="access" style="top: 0; left: 0; right:0; bottom: 0; background: #000; position: absolute; user-select: all; pointer-events: all;">
+    <div id="access"
+        style="top: 0; left: 0; right:0; bottom: 0; background: #000; position: absolute; user-select: all; pointer-events: all;">
         <div id="text-wrapper" style="top: 50%; left: 50%; position: absolute; color: #fff; transform: translate(-50%, -50%); text-align: center;
                 text-transform: uppercase; font-family: Arial, Helvetica, sans-serif; font-weight: 400; line-height: 1.5em; font-size: large; white-space: nowrap;
                 user-select: none; pointer-events: none;
@@ -36,8 +37,10 @@
     <div id="loader" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #fff; pointer-events: none; user-select: none;
         transition: all .2s linear; display: none;">
         <div style="left: 50%; top: 50%; position: absolute; transform: translate(-50%, -50%); text-align: center; width: 130px; height: 165px;
-            font-family: Arial, Helvetica, sans-serif; font-weight: 400; line-height: 1.5em; font-size: large;" class="spinner-wrapper">
-            <img style="width: 130px; height: 130px; pointer-events: none; user-select: none;" src="data/spin.gif" alt="spin gif">
+            font-family: Arial, Helvetica, sans-serif; font-weight: 400; line-height: 1.5em; font-size: large;"
+            class="spinner-wrapper">
+            <img style="width: 130px; height: 130px; pointer-events: none; user-select: none;" src="data/spin.gif"
+                alt="spin gif">
             <br>
             Loading...
         </div>
@@ -207,7 +210,7 @@
                                 const test = new THREE.GLTF2Loader().load(`${modelFiles[i]}`, (response) => {
                                     const animations = response.animations;
                                     mixer = new THREE.AnimationMixer(response.scene);
-                                    const animation = mixer.clipAction( animations[ 0 ] );
+                                    const animation = mixer.clipAction(animations[0]);
                                     animation.play()
 
                                     const scene = response.scene;
@@ -329,7 +332,7 @@
                         }))
                     }
                 }
-                
+
                 // Ховаємо лоадер після завантаження компонентів
                 Promise.all(contentPromises)
                     .then(() => {
@@ -424,7 +427,7 @@
                 requestAnimationFrame(animate);
                 deltaTime = clock.getDelta();
                 totalTime += deltaTime;
-                mixer?.update( deltaTime );
+                // mixer?.update(deltaTime);
                 update();
                 checkController();
                 render();
